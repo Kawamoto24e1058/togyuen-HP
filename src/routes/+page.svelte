@@ -462,7 +462,7 @@
 <section class="relative max-w-7xl mx-auto px-8 lg:px-12 pb-32">
     <!-- Sticky Tab Nav — outside all item loops -->
     <div
-        class="sticky top-20 z-40 bg-white/95 backdrop-blur-sm py-3 mb-12 border-b border-main/5"
+        class="sticky top-20 z-40 bg-[#FCFAF8]/95 backdrop-blur-sm py-3 mb-12 border-b border-sand"
     >
         <ul
             class="flex flex-wrap gap-x-2 gap-y-2 justify-center [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] overflow-x-auto"
@@ -641,6 +641,53 @@
                         >
                             駐車場あり
                         </p>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <span
+                            class="text-[10px] font-sans text-gold tracking-[0.2em] uppercase"
+                            >Instagram</span
+                        >
+                        <a
+                            href="https://www.instagram.com/togyuengram/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex items-center gap-2 font-serif text-sm tracking-[0.1em] text-main/80 hover:text-gold transition-colors duration-300"
+                        >
+                            <svg
+                                class="w-4 h-4 flex-shrink-0"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                            >
+                                <rect
+                                    x="2"
+                                    y="2"
+                                    width="20"
+                                    height="20"
+                                    rx="5"
+                                    ry="5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="4"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                                <circle
+                                    cx="17.5"
+                                    cy="6.5"
+                                    r="0.5"
+                                    fill="currentColor"
+                                    stroke="none"
+                                />
+                            </svg>
+                            @togyuengram
+                        </a>
                     </div>
                 </div>
             </div>

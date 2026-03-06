@@ -14,10 +14,13 @@ export async function load() {
         ? menuItems.filter(item => item?.recommend).slice(0, 3)
         : [];
 
+    const isError = menuItems.length === 0 && siteAssets.length === 0 && newsItems.length === 0;
+
     return {
         menuItems,
         newsItems,
         siteAssets,
-        recommendedItems
+        recommendedItems,
+        isError: !!isError
     };
 }

@@ -179,6 +179,51 @@
 					>Map</span
 				>
 			</a>
+			<!-- Instagram Link -->
+			<a
+				href="https://www.instagram.com/togyuengram/"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="flex flex-col items-center justify-center gap-1 text-main/70 hover:text-gold transition-colors duration-300"
+				title="Instagram @togyuengram"
+			>
+				<svg
+					class="w-5 h-5"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1.5"
+					viewBox="0 0 24 24"
+				>
+					<rect
+						x="2"
+						y="2"
+						width="20"
+						height="20"
+						rx="5"
+						ry="5"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+					<circle
+						cx="12"
+						cy="12"
+						r="4"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+					<circle
+						cx="17.5"
+						cy="6.5"
+						r="0.5"
+						fill="currentColor"
+						stroke="none"
+					/>
+				</svg>
+				<span
+					class="text-[8px] font-sans tracking-widest uppercase pointer-events-none"
+					>Instagram</span
+				>
+			</a>
 		</div>
 
 		<!-- Mobile Menu Button -->
@@ -335,11 +380,51 @@
 
 		<div class="flex flex-col items-center gap-6 px-8">
 			<!-- Logo -->
-			<p
-				class="text-3xl md:text-4xl font-serif text-[#C5A059] tracking-[0.35em] font-medium"
+			<!-- Instagram -->
+			<a
+				href="https://www.instagram.com/togyuengram/"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="flex items-center gap-3 hover:opacity-70 transition-opacity duration-300"
 			>
-				桃牛苑
-			</p>
+				<svg
+					class="w-6 h-6 text-[#C5A059]"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1.5"
+					viewBox="0 0 24 24"
+				>
+					<rect
+						x="2"
+						y="2"
+						width="20"
+						height="20"
+						rx="5"
+						ry="5"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+					<circle
+						cx="12"
+						cy="12"
+						r="4"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+					<circle
+						cx="17.5"
+						cy="6.5"
+						r="0.5"
+						fill="currentColor"
+						stroke="none"
+					/>
+				</svg>
+				<p
+					class="text-3xl md:text-4xl font-serif text-[#C5A059] tracking-[0.35em] font-medium"
+				>
+					桃牛苑
+				</p>
+			</a>
 			<p
 				class="text-[9px] md:text-[10px] font-sans text-white/30 tracking-[0.5em] uppercase"
 			>
@@ -360,7 +445,7 @@
 
 	<!-- Mobile Sticky CTA (スマホのみ表示) -->
 	<div
-		class="md:hidden fixed bottom-0 left-0 w-full z-50 p-4 bg-white/90 backdrop-blur-md border-t border-[#E5E5E5]"
+		class="md:hidden fixed bottom-0 left-0 w-full z-50 p-4 bg-[#FCFAF8]/95 backdrop-blur-md border-t border-sand"
 		style="padding-bottom: calc(1rem + env(safe-area-inset-bottom));"
 	>
 		<a

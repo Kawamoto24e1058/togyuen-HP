@@ -1,11 +1,40 @@
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		%sveltekit.head%
-	</head>
-	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents">%sveltekit.body%</div>
-	</body>
+<html lang="ja">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<!-- SEO -->
+	<title>焼肉冷麺 桃牛苑 | 和泉中央の厳選黒毛和牛と本場韓国の味</title>
+	<meta name="description"
+		content="和泉中央駅から徒歩7分。桃牛苑（とうぎゅうえん）では厳選された黒毛和牛と、本場韓国の味が楽しめる冷麺・ビビン麺をご用意しております。掘りごたつの座敷でゆったりとした時間をお過ごしください。">
+	<meta name="robots" content="index, follow">
+
+	<!-- OGP -->
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="焼肉冷麺 桃牛苑">
+	<meta property="og:description" content="和泉中央で味わう極上の黒毛和牛と韓国料理。">
+	<meta property="og:image" content="https://togyuen.jp/og-image.jpg">
+	<meta property="og:locale" content="ja_JP">
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="焼肉冷麺 桃牛苑">
+	<meta name="twitter:description" content="和泉中央で味わう極上の黒毛和牛と韓国料理。">
+	<meta name="twitter:image" content="https://togyuen.jp/og-image.jpg">
+
+	<!-- Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&display=swap"
+		rel="stylesheet">
+
+	%sveltekit.head%
+</head>
+
+<body data-sveltekit-preload-data="hover" style="background-color: #FCFAF8;">
+	<div style="display: contents">%sveltekit.body%</div>
+</body>
+
 </html>
