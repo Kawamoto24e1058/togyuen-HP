@@ -321,11 +321,11 @@
 					href="https://www.google.com/maps/search/?api=1&query=桃牛苑+大阪府和泉市唐国町2-5-11"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="bg-main text-base flex flex-col items-center justify-center px-4 w-20 shadow-md border border-main/80"
+					class="bg-main text-white flex justify-center items-center py-4 w-20 shadow-md border border-main/80"
 					onclick={toggleMobileMenu}
 				>
 					<svg
-						class="w-5 h-5 mb-1"
+						class="w-6 h-6"
 						fill="none"
 						stroke="currentColor"
 						viewBox="0 0 24 24"
@@ -340,9 +340,6 @@
 							stroke-width="1.5"
 							d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
 						/></svg
-					>
-					<span class="text-[8px] font-sans tracking-widest uppercase"
-						>Map</span
 					>
 				</a>
 			</div>

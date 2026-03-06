@@ -102,10 +102,10 @@
 </svelte:head>
 
 <!-- Hero Section: Split Layout (Left: Text / Right: Slideshow) -->
-<section class="flex flex-col md:flex-row h-screen">
+<section class="flex flex-col md:flex-row min-h-[70vh] md:min-h-screen">
     <!-- Left: Text Area -->
     <div
-        class="w-full md:w-1/2 bg-[#FAF8F5] flex flex-col justify-center items-center px-12 lg:px-20 py-16 relative"
+        class="w-full md:w-1/2 bg-[#FAF8F5] flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 py-12 md:py-16 relative"
     >
         <!-- Thin gold accent line (top) -->
         <div
@@ -116,7 +116,7 @@
         <div class="flex flex-col md:flex-row items-center gap-10 mt-8">
             <!-- Vertical shop name -->
             <h1
-                class="text-6xl lg:text-[7rem] font-serif text-[#2C2A29] tracking-[0.35em] font-medium leading-none"
+                class="text-5xl lg:text-6xl font-serif text-[#2C2A29] tracking-[0.35em] font-medium leading-none"
                 style="writing-mode: vertical-rl;"
             >
                 桃牛苑
@@ -133,7 +133,7 @@
                 >
 
                 <p
-                    class="text-base md:text-xl font-serif text-[#2C2A29]/80 tracking-[0.2em] leading-loose whitespace-pre-wrap"
+                    class="text-base md:text-xl font-serif !text-[#2C2A29] tracking-[0.2em] leading-loose whitespace-pre-wrap"
                 >
                     {introText}
                 </p>
@@ -170,22 +170,25 @@
     </div>
 
     <!-- Right: Image Slideshow -->
-    <div class="w-full md:w-1/2 relative overflow-hidden h-64 md:h-full">
+    <div
+        class="w-full md:w-1/2 relative overflow-hidden h-64 md:h-auto min-h-[300px] md:min-h-[500px] flex-grow flex-shrink-0 md:self-stretch"
+        style="-webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%); mask-image: linear-gradient(to bottom, black 80%, transparent 100%);"
+    >
         {#if heroImages.length > 0}
             {#each heroImages as src, index}
-                <div
-                    class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
-                    style="background-image: url('{src}'); opacity: {index ===
-                    currentIndex
-                        ? 1
-                        : 0};"
-                ></div>
+                <img
+                    {src}
+                    alt="Hero Slide"
+                    class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
+                    style="opacity: {index === currentIndex ? 1 : 0};"
+                />
             {/each}
         {:else}
-            <div
-                class="absolute inset-0 bg-cover bg-center"
-                style="background-image: url('{fallbackHero}');"
-            ></div>
+            <img
+                src={fallbackHero}
+                alt="Hero Fallback"
+                class="absolute inset-0 w-full h-full object-cover"
+            />
         {/if}
         <!-- Subtle dark gradient on left edge for depth -->
         <div
@@ -195,78 +198,89 @@
 </section>
 
 <!-- Concept Section -->
-<section class="w-full bg-[#FAF8F5] py-24 md:py-36 border-b border-main/5">
-    <div class="max-w-5xl mx-auto px-8 lg:px-12">
-        <div class="flex flex-col md:flex-row items-center gap-16 md:gap-20">
-            <!-- Left: Text -->
-            <div class="w-full md:w-1/2 flex flex-col gap-8 fade-up">
-                <!-- Section Label -->
-                <div class="flex items-center gap-4">
-                    <div class="w-8 h-px bg-[#C5A059]"></div>
+<section class="mt-16 w-full border-b border-[#E5DFD3] overflow-hidden">
+    <div class="grid grid-cols-1 md:grid-cols-2 items-stretch">
+        <!-- Left: Vertical Text (Desktop) / Horizontal Text (Mobile) -->
+        <div
+            class="flex items-center justify-center px-6 md:px-16 py-12 md:py-24 min-h-[400px] md:min-h-[500px] order-2 md:order-1 w-full fade-up"
+        >
+            <div
+                class="flex flex-col md:flex-row-reverse gap-8 md:gap-8 items-center md:items-start text-center md:text-left w-full"
+            >
+                <!-- Heading column -->
+                <div class="flex flex-col items-center gap-4">
                     <span
-                        class="text-[10px] font-sans tracking-[0.5em] text-[#C5A059] uppercase"
+                        class="text-[9px] font-sans tracking-[0.6em] text-[#C5A059] uppercase [writing-mode:horizontal-tb] md:[writing-mode:vertical-rl]"
                         >Concept</span
                     >
-                </div>
-
-                <!-- Heading -->
-                <h2
-                    class="text-3xl md:text-4xl font-serif text-[#2C2A29] leading-loose tracking-widest"
-                >
-                    黒毛和牛の旨味と、<br />寛ぎの空間。
-                </h2>
-
-                <!-- Gold thin line -->
-                <div class="w-12 h-px bg-[#C5A059]/60"></div>
-
-                <!-- Body text -->
-                <div
-                    class="flex flex-col gap-6 font-serif text-sm md:text-base text-[#2C2A29]/75 leading-loose tracking-widest"
-                >
-                    <p>
-                        当店のお肉はすべて厳選された黒毛和牛を使用し、<br />
-                        鮮度と旨味に徹底的にこだわってご提供しております。
-                    </p>
-                    <p>
-                        辛いもの好きにはたまらないスパイシーなビビン麵や、<br />
-                        さっぱりとした韓国冷麺など、<br />
-                        本場韓国の味を楽しめるサイドメニューも豊富にご用意。
-                    </p>
-                    <p>
-                        店内は足を伸ばしてゆっくりとお寛ぎいただける<br />
-                        掘りごたつ式の座敷となっております。<br />
-                        ご家族やご友人との特別な時間を、<br />
-                        美味しい焼肉とともにお過ごしください。
-                    </p>
-                </div>
-            </div>
-
-            <!-- Right: Image -->
-            <div class="w-full md:w-1/2 aspect-[4/5] overflow-hidden fade-up">
-                {#if assets.length > 0 && assets[0].imageUrl}
-                    <img
-                        src={assets[0].imageUrl}
-                        alt="桃牛苑 店内・料理イメージ"
-                        class="w-full h-full object-cover"
-                    />
-                {:else}
-                    <div
-                        class="w-full h-full bg-[#2C2A29]/5 flex items-center justify-center"
+                    <div class="w-12 h-px md:w-px md:h-6 bg-[#C5A059]/60"></div>
+                    <h2
+                        class="text-xl md:text-2xl font-serif text-[#2C2A29] tracking-[0.3em] md:leading-[2.5] leading-loose [writing-mode:horizontal-tb] md:[writing-mode:vertical-rl]"
                     >
-                        <span
-                            class="font-serif text-[#2C2A29]/30 tracking-widest text-sm"
-                            >桃牛苑</span
-                        >
-                    </div>
-                {/if}
+                        黒毛和牛の旨味と、<br class="md:hidden" />寛ぎの空間。
+                    </h2>
+                </div>
+
+                <!-- Body text column -->
+                <div
+                    class="flex flex-col md:flex-row gap-4 md:gap-6 text-[#2C2A29]/65 fade-up delay-200 [writing-mode:horizontal-tb] md:[writing-mode:vertical-rl]"
+                >
+                    <p
+                        class="font-serif text-sm md:text-xs leading-[2.2] md:leading-[2.5] tracking-[0.15em]"
+                    >
+                        当店のお肉はすべて厳選された黒毛和牛を使用し、<br
+                            class="md:hidden"
+                        />鮮度と旨味に徹底的にこだわってご提供しております。
+                    </p>
+                    <p
+                        class="font-serif text-sm md:text-xs leading-[2.2] md:leading-[2.5] tracking-[0.15em]"
+                    >
+                        辛いもの好きにはたまらないビビン麵、さっぱりとした韓国冷麺など、<br
+                            class="md:hidden"
+                        />本場の味が楽しめるサイドメニューも豊富にご用意。
+                    </p>
+                    <p
+                        class="font-serif text-sm md:text-xs leading-[2.2] md:leading-[2.5] tracking-[0.15em]"
+                    >
+                        掘りごたつ式の座敷で、ご家族やご友人との特別な時間を<br
+                            class="md:hidden"
+                        />美味しい焼肉とともにお過ごしください。
+                    </p>
+                </div>
             </div>
+        </div>
+
+        <!-- Right: Image -->
+        <div
+            class="relative overflow-hidden min-h-[300px] md:min-h-[500px] order-1 md:order-2 fade-up delay-100"
+            style="-webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 100%); mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 100%);"
+        >
+            {#if assets.length > 0 && assets[0].imageUrl}
+                <img
+                    src={assets[0].imageUrl}
+                    alt="桃牛苑 店内・料理イメージ"
+                    class="w-full h-full min-h-[300px] md:min-h-[500px] object-cover hover:scale-[1.03] transition-transform duration-[2000ms] ease-out"
+                />
+            {:else}
+                <div
+                    class="absolute inset-0 bg-[#2C2A29]/8 flex items-center justify-center"
+                >
+                    <span
+                        class="font-serif text-[#2C2A29]/20 tracking-[0.5em] text-sm"
+                        style="writing-mode: vertical-rl;">桃牛苑</span
+                    >
+                </div>
+            {/if}
+            <div
+                class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#FCFAF8]/50 to-transparent pointer-events-none md:block hidden"
+            ></div>
         </div>
     </div>
 </section>
 
 <!-- NEWS Section -->
 <section
-    class="w-full bg-base py-24 sm:py-32 relative z-10 border-b border-main/5"
+    class="w-full bg-base py-16 md:py-24 relative z-10 border-b border-main/5"
 >
     <div class="max-w-5xl mx-auto px-8 lg:px-12 fade-up">
         <div class="flex flex-col md:flex-row gap-12 md:gap-24 items-start">
@@ -333,7 +347,7 @@
 </section>
 
 <!-- Today's Special Section -->
-<section class="max-w-7xl mx-auto px-8 lg:px-12 py-32 sm:py-40">
+<section class="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-16 md:py-32">
     <div class="text-center mb-24 space-y-8 fade-up">
         <h2 class="text-4xl md:text-5xl font-serif tracking-[0.2em] text-sumi">
             本日のおすすめ
@@ -459,16 +473,18 @@
 </section>
 
 <!-- Full お品書き Section (Tab Nav + Items) -->
-<section class="relative max-w-7xl mx-auto px-8 lg:px-12 pb-32">
+<section
+    class="relative max-w-7xl mx-auto px-4 md:px-8 lg:px-12 pb-16 text-[#2C2A29]"
+>
     <!-- Sticky Tab Nav — outside all item loops -->
     <div
-        class="sticky top-20 z-40 bg-[#FCFAF8]/95 backdrop-blur-sm py-3 mb-12 border-b border-sand"
+        class="sticky top-20 z-40 bg-[#FCFAF8]/95 backdrop-blur-sm py-3 mb-8 md:mb-12 border-b border-sand"
     >
         <ul
-            class="flex flex-wrap gap-x-2 gap-y-2 justify-center [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] overflow-x-auto"
+            class="flex overflow-x-auto whitespace-nowrap w-full max-w-[100vw] pb-4 px-4 -mx-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
             {#each sortedCategories as category}
-                <li>
+                <li class="snap-start shrink-0">
                     <button
                         onclick={() => (selectedCategory = category)}
                         class="whitespace-nowrap text-xs md:text-sm font-serif tracking-[0.2em] py-2 px-4 border-b-2 transition-all duration-200 {category ===
@@ -485,66 +501,53 @@
 
     <!-- Selected category items (tab content) -->
     {#key selectedCategory}
-        <div class="w-full max-w-6xl mx-auto" in:fade={{ duration: 250 }}>
+        <div
+            class="w-full max-w-[100vw] overflow-hidden px-4 md:px-0 mx-auto md:max-w-4xl box-border"
+            in:fade={{ duration: 250 }}
+        >
             {#if selectedCategory && groupedMenu[selectedCategory]}
-                <div class="flex flex-col md:flex-row gap-12 md:gap-20">
-                    <!-- Vertical Category Header -->
-                    <div
-                        class="md:w-32 flex-shrink-0 flex flex-col items-center md:items-start relative"
-                    >
-                        <div class="relative pl-0 md:pl-8">
-                            <div
-                                class="hidden md:block absolute top-0 left-0 w-px h-full bg-gold/50"
-                            ></div>
-                            <h2
-                                class="text-3xl md:text-5xl font-serif text-main tracking-[0.4em] leading-loose whitespace-nowrap hidden md:block"
-                                style="writing-mode: vertical-rl;"
-                            >
-                                {selectedCategory}
-                            </h2>
-                            <h2
-                                class="text-3xl font-serif text-main tracking-[0.2em] md:hidden mb-4"
-                            >
-                                {selectedCategory}
-                            </h2>
-                            <div
-                                class="md:hidden w-12 h-px bg-gold/50 mx-auto mb-8"
-                            ></div>
-                        </div>
+                <div class="flex flex-col w-full">
+                    <!-- Category Label (horizontal) -->
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-px h-8 bg-[#C5A059]/60"></div>
+                        <h2
+                            class="text-lg md:text-xl font-serif tracking-[0.3em]"
+                            style="color: #2C2A29;"
+                        >
+                            {selectedCategory}
+                        </h2>
+                        <div class="flex-1 h-px bg-[#E5DFD3]"></div>
                     </div>
 
                     <!-- Menu Items -->
-                    <div class="flex-grow flex flex-col w-full">
-                        {#each groupedMenu[selectedCategory] as item, i}
+                    <div class="flex flex-col w-full">
+                        {#each groupedMenu[selectedCategory] as item}
                             <div
-                                class="flex flex-col py-6 border-b border-[#E5E5E5] group/item"
-                                style={`animation-delay: ${i * 30}ms`}
+                                class="flex justify-between items-start w-full gap-4 py-3 border-b border-[#E5DFD3]"
                             >
                                 <div
-                                    class="flex justify-between items-end w-full"
+                                    class="flex-1 min-w-0 break-words whitespace-normal text-base text-[#2C2A29] leading-snug"
                                 >
-                                    <div class="flex flex-col mr-6">
-                                        <h3
-                                            class="text-lg md:text-xl font-serif text-main tracking-[0.15em] transform group-hover/item:translate-x-2 transition-transform duration-500"
-                                        >
-                                            {item.name}
-                                        </h3>
-                                        {#if item.description}
-                                            <p
-                                                class="text-main/50 text-xs md:text-sm tracking-[0.15em] leading-relaxed mt-2 w-full md:w-3/4"
-                                            >
-                                                {item.description}
-                                            </p>
-                                        {/if}
-                                    </div>
-                                    <p
-                                        class="text-[#2C2A29] tracking-widest flex-shrink-0"
+                                    <h3
+                                        class="font-serif tracking-[0.15em] mb-1 group-hover/item:translate-x-1 transition-transform duration-500 block !text-[#2C2A29]"
                                     >
-                                        ¥{item.price !== null
-                                            ? item.price.toLocaleString()
-                                            : "---"}
-                                    </p>
+                                        {item.name}
+                                    </h3>
+                                    {#if item.description}
+                                        <p
+                                            class="text-xs tracking-[0.1em] !text-[#2C2A29]/50"
+                                        >
+                                            {item.description}
+                                        </p>
+                                    {/if}
                                 </div>
+                                <p
+                                    class="flex-shrink-0 whitespace-nowrap text-sm text-[#2C2A29] pt-1 tracking-widest font-serif"
+                                >
+                                    ¥{item.price !== null
+                                        ? item.price.toLocaleString()
+                                        : "---"}
+                                </p>
                             </div>
                         {/each}
                     </div>
@@ -557,7 +560,7 @@
 <!-- Access Section -->
 <section
     id="access"
-    class="w-full bg-base py-32 sm:py-40 border-t border-main/5 relative scroll-mt-20"
+    class="w-full bg-base py-16 md:py-32 border-t border-main/5 relative scroll-mt-20"
 >
     <div class="max-w-7xl mx-auto px-8 lg:px-12 fade-up">
         <div class="text-center mb-20 space-y-6">
