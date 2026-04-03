@@ -1,5 +1,4 @@
 <script lang="ts">
-	import favicon from "$lib/assets/favicon.svg";
 	import "../app.css";
 	import { onMount } from "svelte";
 	import { fade } from "svelte/transition";
@@ -84,7 +83,8 @@
 	<meta property="og:image" content="https://prod-files-secure.s3.us-west-2.amazonaws.com/c41f5244-e739-81f9-b55c-0003490499e3/bc3c864f-67b8-4780-bd11-12c7713dd89f/niku.webp">
 	<meta property="og:site_name" content="ホルモン焼肉 桃牛苑">
 
-	<link rel="icon" href={favicon} />
+
+
 </svelte:head>
 
 {#if showSplash}
