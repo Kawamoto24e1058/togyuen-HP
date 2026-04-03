@@ -41,6 +41,7 @@ export async function getMenuItems() {
                 category: page.properties['カテゴリ']?.select?.name || '未分類',
                 price: page.properties['価格']?.number ?? null,
                 recommend: page.properties['おすすめ']?.checkbox || false,
+                soldOut: page.properties['売り切れ']?.checkbox || false,
                 description: page.properties['説明']?.rich_text?.[0]?.plain_text || '',
                 imageUrl: imageUrl,
             };

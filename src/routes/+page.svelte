@@ -398,8 +398,15 @@
                                 <img
                                     src={item.imageUrl}
                                     alt={item.name}
-                                    class="w-full h-full object-cover filter brightness-90 group-hover:brightness-110 group-hover:scale-105 transition-all duration-700"
+                                    class="w-full h-full object-cover filter brightness-90 group-hover:brightness-110 group-hover:scale-105 transition-all duration-700 {item.soldOut ? 'opacity-50' : ''}"
                                 />
+                                {#if item.soldOut}
+                                    <div class="absolute inset-0 flex items-center justify-center z-20">
+                                        <div class="bg-black/40 backdrop-blur-[2px] px-8 py-4 border border-white/20">
+                                            <span class="text-white text-2xl font-serif tracking-[0.3em]">SOLD OUT</span>
+                                        </div>
+                                    </div>
+                                {/if}
                             {:else}
                                 <div
                                     class="w-full h-full bg-neutral-900 border border-neutral-800 flex items-center justify-center"
@@ -423,9 +430,12 @@
                             {item.category}
                         </span>
                         <h3
-                            class="text-3xl lg:text-4xl font-serif text-sumi leading-tight tracking-[0.1em]"
+                            class="text-3xl lg:text-4xl font-serif text-sumi leading-tight tracking-[0.1em] flex items-center gap-4"
                         >
                             {item.name}
+                            {#if item.soldOut}
+                                <span class="px-3 py-1 text-sm border border-[#8A2A2A] text-[#8A2A2A] font-serif tracking-normal">完売</span>
+                            {/if}
                         </h3>
 
                         {#if item.description}
@@ -529,9 +539,12 @@
                                     class="flex-1 min-w-0 break-words whitespace-normal text-base text-[#2C2A29] leading-snug"
                                 >
                                     <h3
-                                        class="font-serif tracking-[0.15em] mb-1 group-hover/item:translate-x-1 transition-transform duration-500 block !text-[#2C2A29]"
+                                        class="font-serif tracking-[0.15em] mb-1 group-hover/item:translate-x-1 transition-transform duration-500 block {item.soldOut ? '!text-gray-400' : '!text-[#2C2A29]'}"
                                     >
                                         {item.name}
+                                        {#if item.soldOut}
+                                            <span class="ml-3 px-2 py-0.5 text-[10px] border border-[#8A2A2A] text-[#8A2A2A] font-serif tracking-normal vertical-middle">完売</span>
+                                        {/if}
                                     </h3>
                                     {#if item.description}
                                         <p
@@ -542,7 +555,7 @@
                                     {/if}
                                 </div>
                                 <p
-                                    class="flex-shrink-0 whitespace-nowrap text-sm text-[#2C2A29] pt-1 tracking-widest font-serif"
+                                    class="flex-shrink-0 whitespace-nowrap text-sm {item.soldOut ? 'text-gray-400' : 'text-[#2C2A29]'} pt-1 tracking-widest font-serif"
                                 >
                                     ¥{item.price !== null
                                         ? item.price.toLocaleString()
