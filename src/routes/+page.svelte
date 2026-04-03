@@ -97,9 +97,7 @@
     };
 </script>
 
-<svelte:head>
-    <title>老舗焼肉店 桃牛苑 | トップ</title>
-</svelte:head>
+
 
 <!-- Hero Section: Split Layout (Left: Text / Right: Slideshow) -->
 <section class="flex flex-col md:flex-row min-h-[70vh] md:min-h-screen">
@@ -205,42 +203,40 @@
             class="flex items-center justify-center px-6 md:px-16 py-12 md:py-24 min-h-[400px] md:min-h-[500px] order-2 md:order-1 w-full fade-up"
         >
             <div
-                class="flex flex-col md:flex-row-reverse gap-8 md:gap-8 items-center md:items-start text-center md:text-left w-full"
+                class="block mx-auto text-center md:text-left w-full md:w-auto [writing-mode:horizontal-tb] md:[writing-mode:vertical-rl]"
             >
                 <!-- Heading column -->
-                <div class="flex flex-col items-center gap-4">
+                <div class="flex flex-col md:flex-row items-center md:items-start gap-4 mb-8 md:mb-0 md:ml-12 [writing-mode:horizontal-tb] md:[writing-mode:vertical-rl]">
                     <span
-                        class="text-[9px] font-sans tracking-[0.6em] text-[#C5A059] uppercase [writing-mode:horizontal-tb] md:[writing-mode:vertical-rl]"
+                        class="text-[9px] font-sans tracking-[0.6em] text-[#C5A059] uppercase"
                         >Concept</span
                     >
                     <div class="w-12 h-px md:w-px md:h-6 bg-[#C5A059]/60"></div>
                     <h2
-                        class="text-xl md:text-2xl font-serif text-[#2C2A29] tracking-[0.3em] md:leading-[2.5] leading-loose [writing-mode:horizontal-tb] md:[writing-mode:vertical-rl]"
+                        class="text-xl md:text-2xl font-serif text-[#2C2A29] tracking-[0.3em] leading-loose md:leading-[2.5]"
                     >
                         黒毛和牛の旨味と、<br class="md:hidden" />寛ぎの空間。
                     </h2>
                 </div>
 
                 <!-- Body text column -->
-                <div
-                    class="flex flex-col md:flex-row gap-4 md:gap-6 text-[#2C2A29]/65 fade-up delay-200 [writing-mode:horizontal-tb] md:[writing-mode:vertical-rl]"
-                >
+                <div class="block fade-up delay-200">
                     <p
-                        class="font-serif text-sm md:text-xs leading-[2.2] md:leading-[2.5] tracking-[0.15em]"
+                        class="font-serif text-[#2C2A29]/65 text-sm md:text-xs leading-[2.2] md:leading-[2.5] tracking-[0.15em] md:tracking-widest block mb-4 md:mb-0 md:ml-6"
                     >
                         当店のお肉はすべて厳選された黒毛和牛を使用し、<br
                             class="md:hidden"
                         />鮮度と旨味に徹底的にこだわってご提供しております。
                     </p>
                     <p
-                        class="font-serif text-sm md:text-xs leading-[2.2] md:leading-[2.5] tracking-[0.15em]"
+                        class="font-serif text-[#2C2A29]/65 text-sm md:text-xs leading-[2.2] md:leading-[2.5] tracking-[0.15em] md:tracking-widest block mb-4 md:mb-0 md:ml-6"
                     >
                         辛いもの好きにはたまらないビビン麵、さっぱりとした韓国冷麺など、<br
                             class="md:hidden"
                         />本場の味が楽しめるサイドメニューも豊富にご用意。
                     </p>
                     <p
-                        class="font-serif text-sm md:text-xs leading-[2.2] md:leading-[2.5] tracking-[0.15em]"
+                        class="font-serif text-[#2C2A29]/65 text-sm md:text-xs leading-[2.2] md:leading-[2.5] tracking-[0.15em] md:tracking-widest block md:ml-6"
                     >
                         掘りごたつ式の座敷で、ご家族やご友人との特別な時間を<br
                             class="md:hidden"

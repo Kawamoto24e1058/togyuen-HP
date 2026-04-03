@@ -73,6 +73,17 @@
 </script>
 
 <svelte:head>
+	<title>ホルモン焼肉 桃牛苑 | 和泉中央の厳選黒毛和牛</title>
+	<meta name="description" content="大阪府和泉市（和泉中央）の老舗焼肉店「桃牛苑」。厳選された黒毛和牛と本場韓国の味を、落ち着いた和モダンの空間でご堪能ください。">
+
+	<!-- OGP -->
+	<meta property="og:title" content="ホルモン焼肉 桃牛苑 | 和泉中央の厳選黒毛和牛">
+	<meta property="og:description" content="厳選された黒毛和牛と本場韓国の味を、和泉中央で。ご家族やご友人との特別な時間を美味しい焼肉とともにお過ごしください。">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://togyuen-hp.vercel.app/">
+	<meta property="og:image" content="https://prod-files-secure.s3.us-west-2.amazonaws.com/c41f5244-e739-81f9-b55c-0003490499e3/bc3c864f-67b8-4780-bd11-12c7713dd89f/niku.webp">
+	<meta property="og:site_name" content="ホルモン焼肉 桃牛苑">
+
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
@@ -440,30 +451,25 @@
 		</div>
 	</footer>
 
-	<!-- Mobile Sticky CTA (スマホのみ表示) -->
-	<div
-		class="md:hidden fixed bottom-0 left-0 w-full z-50 p-4 bg-[#FCFAF8]/95 backdrop-blur-md border-t border-sand"
-		style="padding-bottom: calc(1rem + env(safe-area-inset-bottom));"
+	<!-- Mobile Phone FAB (スマホのみ表示) -->
+	<a
+		href="tel:0725-53-0083"
+		class="fixed bottom-6 right-6 z-50 flex md:hidden items-center justify-center w-14 h-14 bg-[#B49257] text-white rounded-full shadow-lg opacity-90 hover:opacity-100 transition-opacity"
+		aria-label="お電話でのご予約"
 	>
-		<a
-			href="tel:0725530083"
-			class="flex justify-center items-center w-full py-4 bg-[#C5A059] text-white font-serif tracking-widest text-lg shadow-lg hover:bg-[#B38F4D] transition-colors duration-300"
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			class="h-6 w-6"
+			fill="none"
+			viewBox="0 0 24 24"
+			stroke="currentColor"
 		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				class="h-5 w-5 mr-2"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke="currentColor"
-			>
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-				/>
-			</svg>
-			お電話でのご予約
-		</a>
-	</div>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="2"
+				d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+			/>
+		</svg>
+	</a>
 </div>
