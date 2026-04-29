@@ -350,26 +350,30 @@
                     <button
                         type="button"
                         onclick={() => openNews(news)}
-                        class="w-full text-left group flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-10 py-6 border-b border-main/10 hover:bg-main/[0.03] transition-colors duration-200 px-4 -mx-4 sm:mx-0 sm:px-2"
+                        class="w-full text-left group flex flex-col gap-1.5 py-6 border-b border-main/10 hover:bg-main/[0.03] transition-colors duration-200 px-2"
                     >
-                        <span class="text-[10px] sm:text-xs font-sans tracking-[0.2em] text-gold/80 w-24 flex-shrink-0">
+                        <!-- 日付 -->
+                        <span class="text-[10px] font-sans tracking-[0.2em] text-gold/80">
                             {formatDate(news.date)}
                         </span>
-                        <div class="flex-1 flex flex-col gap-1.5 min-w-0">
-                            <span class="text-[#2C2A29] tracking-widest text-sm group-hover:text-[#C5A059] transition-colors duration-200">
-                                {news.title}
-                            </span>
-                            {#if news.body}
-                                <span class="text-[11px] font-serif text-main/45 tracking-[0.08em] leading-relaxed line-clamp-2">
-                                    {news.body}
+                        <!-- タイトル＋矢印 -->
+                        <div class="flex items-start gap-3">
+                            <div class="flex-1 flex flex-col gap-1 min-w-0">
+                                <span class="text-[#2C2A29] tracking-[0.12em] text-sm group-hover:text-[#C5A059] transition-colors duration-200">
+                                    {news.title}
                                 </span>
-                            {/if}
+                                {#if news.body}
+                                    <span class="text-[11px] font-serif text-main/45 tracking-[0.06em] leading-relaxed line-clamp-2">
+                                        {news.body}
+                                    </span>
+                                {/if}
+                            </div>
+                            <span class="flex-shrink-0 w-5 h-5 flex items-center justify-center text-gold/50 group-hover:text-gold transition-colors duration-200 mt-0.5">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </span>
                         </div>
-                        <span class="flex-shrink-0 w-5 h-5 flex items-center justify-center text-gold/50 group-hover:text-gold transition-colors duration-200 self-start mt-0.5">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-4 h-4">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </span>
                     </button>
                 {:else}
                     <div class="py-12 text-center">
