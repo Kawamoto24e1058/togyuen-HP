@@ -133,45 +133,42 @@
             />
         {/if}
 
-        <!-- グラデーションオーバーレイ（全体を薄く暗く） -->
-        <div class="absolute inset-0 bg-black/40 pointer-events-none"></div>
-        <!-- 上部・下部を追加で暗く -->
-        <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 pointer-events-none"></div>
+        <!-- オーバーレイ -->
+        <div class="absolute inset-0 bg-black/42 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/55 pointer-events-none"></div>
 
         <!-- コンテンツ -->
-        <div class="relative h-full flex flex-col justify-between px-8 pt-12 pb-14">
-            <!-- 上部：サブタイトル -->
+        <div class="relative h-full flex flex-col justify-between items-center px-8 pt-8 pb-14 text-center">
+
+            <!-- 上部：英語サブタイトル -->
             <div class="flex flex-col items-center gap-3 mt-4">
-                <span class="text-[9px] font-sans tracking-[0.5em] text-[#C5A059] uppercase"
-                    style="text-shadow: 0 1px 6px rgba(0,0,0,0.8);">
+                <span class="text-[9px] font-sans tracking-[0.45em] text-[#C5A059] uppercase"
+                    style="text-shadow:0 1px 6px rgba(0,0,0,0.9);">
                     Hormonyakiniku Togyuen
                 </span>
-                <div class="w-6 h-px bg-[#C5A059]/80"></div>
+                <div class="w-6 h-px bg-[#C5A059]/70"></div>
             </div>
 
-            <!-- 中央：店名 + キャッチコピー（暗いパネル付き） -->
+            <!-- 中央：店名 + キャッチ -->
             <div class="flex flex-col items-center gap-5">
-                <!-- 半透明パネルで背景を確実に暗く -->
-                <div class="bg-black/40 backdrop-blur-[2px] px-10 py-8 flex flex-col items-center gap-4 border border-white/10">
-                    <h1
-                        class="text-[4.5rem] font-serif text-white tracking-[0.3em] font-medium leading-none"
-                        style="text-shadow: 0 2px 16px rgba(0,0,0,0.9);"
-                    >
-                        桃牛苑
-                    </h1>
-                    <div class="w-8 h-px bg-[#C5A059]/70"></div>
-                    <p class="text-xs font-serif text-white/90 tracking-[0.25em] leading-loose text-center whitespace-pre-wrap"
-                        style="text-shadow: 0 1px 8px rgba(0,0,0,0.9);">
-                        {introText}
-                    </p>
-                </div>
+                <h1
+                    class="font-serif text-white font-medium whitespace-nowrap"
+                    style="font-size: clamp(2rem, 13vw, 3rem); letter-spacing: 0.35em; text-shadow: 0 2px 20px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,0.8);"
+                >
+                    桃牛苑
+                </h1>
+                <div class="w-8 h-px bg-[#C5A059]/70"></div>
+                <p class="text-xs font-serif text-white/85 tracking-[0.2em] leading-loose whitespace-pre-wrap"
+                    style="text-shadow: 0 1px 10px rgba(0,0,0,1);">
+                    {introText}
+                </p>
             </div>
 
             <!-- 下部：CTAボタン -->
-            <div class="flex flex-col items-center gap-3">
+            <div class="flex flex-col items-center gap-3 w-full max-w-[280px]">
                 <a
                     href="tel:0725-53-0083"
-                    class="w-full max-w-[280px] flex items-center justify-center gap-3 bg-[#C5A059] text-white px-8 py-4 text-sm font-serif tracking-[0.25em] shadow-xl active:opacity-80 transition-opacity"
+                    class="w-full flex items-center justify-center gap-3 bg-[#C5A059] text-white py-4 text-sm font-serif tracking-[0.25em] shadow-lg active:opacity-80 transition-opacity"
                 >
                     <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -181,7 +178,7 @@
                 </a>
                 <a
                     href="/#access"
-                    class="w-full max-w-[280px] flex items-center justify-center gap-3 border border-white/60 bg-black/20 text-white px-8 py-4 text-sm font-serif tracking-[0.25em] active:bg-white/10 transition-colors"
+                    class="w-full flex items-center justify-center gap-3 border border-white/50 text-white py-4 text-sm font-serif tracking-[0.25em] active:bg-white/10 transition-colors"
                 >
                     アクセス・営業時間
                 </a>
