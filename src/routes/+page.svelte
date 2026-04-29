@@ -96,19 +96,17 @@
         return dateStr.replace(/-/g, ".");
     };
 
-    // お知らせアコーディオン
-    /** @type {Set<string>} */
-    let openNewsIds = $state(new Set());
+    // お知らせモーダル
+    /** @type {{ id: string, title: string, date: string, body: string } | null} */
+    let selectedNews = $state(null);
 
-    /** @param {string} id */
-    const toggleNews = (id) => {
-        const next = new Set(openNewsIds);
-        if (next.has(id)) {
-            next.delete(id);
-        } else {
-            next.add(id);
-        }
-        openNewsIds = next;
+    /** @param {{ id: string, title: string, date: string, body: string }} news */
+    const openNews = (news) => {
+        selectedNews = news;
+    };
+
+    const closeNews = () => {
+        selectedNews = null;
     };
 </script>
 
@@ -135,37 +133,45 @@
             />
         {/if}
 
-        <!-- グラデーションオーバーレイ -->
-        <div class="absolute inset-0 bg-gradient-to-b from-[#2C2A29]/60 via-[#2C2A29]/20 to-[#2C2A29]/75 pointer-events-none"></div>
+        <!-- グラデーションオーバーレイ（全体を薄く暗く） -->
+        <div class="absolute inset-0 bg-black/40 pointer-events-none"></div>
+        <!-- 上部・下部を追加で暗く -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 pointer-events-none"></div>
 
         <!-- コンテンツ -->
         <div class="relative h-full flex flex-col justify-between px-8 pt-12 pb-14">
-            <!-- 上部：店名 + サブタイトル -->
+            <!-- 上部：サブタイトル -->
             <div class="flex flex-col items-center gap-3 mt-4">
-                <span class="text-[9px] font-sans tracking-[0.5em] text-[#C5A059] uppercase">
+                <span class="text-[9px] font-sans tracking-[0.5em] text-[#C5A059] uppercase"
+                    style="text-shadow: 0 1px 6px rgba(0,0,0,0.8);">
                     Hormonyakiniku Togyuen
                 </span>
-                <div class="w-6 h-px bg-[#C5A059]/60"></div>
+                <div class="w-6 h-px bg-[#C5A059]/80"></div>
             </div>
 
-            <!-- 中央：大きな店名 -->
+            <!-- 中央：店名 + キャッチコピー（暗いパネル付き） -->
             <div class="flex flex-col items-center gap-5">
-                <h1
-                    class="text-[4.5rem] font-serif text-white tracking-[0.3em] font-medium leading-none drop-shadow-lg"
-                >
-                    桃牛苑
-                </h1>
-                <p class="text-sm font-serif text-white/80 tracking-[0.25em] leading-loose text-center whitespace-pre-wrap drop-shadow">
-                    {introText}
-                </p>
+                <!-- 半透明パネルで背景を確実に暗く -->
+                <div class="bg-black/40 backdrop-blur-[2px] px-10 py-8 flex flex-col items-center gap-4 border border-white/10">
+                    <h1
+                        class="text-[4.5rem] font-serif text-white tracking-[0.3em] font-medium leading-none"
+                        style="text-shadow: 0 2px 16px rgba(0,0,0,0.9);"
+                    >
+                        桃牛苑
+                    </h1>
+                    <div class="w-8 h-px bg-[#C5A059]/70"></div>
+                    <p class="text-xs font-serif text-white/90 tracking-[0.25em] leading-loose text-center whitespace-pre-wrap"
+                        style="text-shadow: 0 1px 8px rgba(0,0,0,0.9);">
+                        {introText}
+                    </p>
+                </div>
             </div>
 
             <!-- 下部：CTAボタン -->
-            <div class="flex flex-col items-center gap-4">
-                <div class="w-px h-10 bg-[#C5A059]/50"></div>
+            <div class="flex flex-col items-center gap-3">
                 <a
                     href="tel:0725-53-0083"
-                    class="w-full max-w-[260px] flex items-center justify-center gap-3 bg-[#C5A059] text-white px-8 py-4 text-sm font-serif tracking-[0.25em] shadow-lg active:opacity-80 transition-opacity"
+                    class="w-full max-w-[280px] flex items-center justify-center gap-3 bg-[#C5A059] text-white px-8 py-4 text-sm font-serif tracking-[0.25em] shadow-xl active:opacity-80 transition-opacity"
                 >
                     <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -175,7 +181,7 @@
                 </a>
                 <a
                     href="/#access"
-                    class="w-full max-w-[260px] flex items-center justify-center gap-3 border border-white/50 text-white px-8 py-4 text-sm font-serif tracking-[0.25em] active:bg-white/10 transition-colors"
+                    class="w-full max-w-[280px] flex items-center justify-center gap-3 border border-white/60 bg-black/20 text-white px-8 py-4 text-sm font-serif tracking-[0.25em] active:bg-white/10 transition-colors"
                 >
                     アクセス・営業時間
                 </a>
@@ -350,62 +356,23 @@
                     class="border-t border-main/10 w-full hidden md:block mb-2"
                 ></div>
                 {#each newsItems as news}
-                    {@const isOpen = openNewsIds.has(news.id)}
-                    <div class="border-b border-main/10">
-                        <!-- タップ可能なヘッダー行 -->
-                        <button
-                            type="button"
-                            onclick={() => toggleNews(news.id)}
-                            class="w-full text-left group flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-10 py-6 hover:bg-main/[0.02] transition-colors duration-300 px-4 -mx-4 sm:mx-0 sm:px-2"
-                        >
-                            <span
-                                class="text-[10px] sm:text-xs font-sans tracking-[0.2em] text-gold/80 w-24 flex-shrink-0"
-                                >{formatDate(news.date)}</span
-                            >
-                            <span
-                                class="flex-1 text-[#2C2A29] tracking-widest text-sm"
-                            >
-                                {news.title}
-                            </span>
-                            <!-- 開閉インジケーター (本文がある場合のみ表示) -->
-                            {#if news.body}
-                                <span
-                                    class="flex-shrink-0 w-5 h-5 flex items-center justify-center text-gold/60 transition-transform duration-300 {isOpen
-                                        ? 'rotate-180'
-                                        : ''}"
-                                >
-                                    <svg
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                        class="w-4 h-4"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="1.5"
-                                            d="M19 9l-7 7-7-7"
-                                        />
-                                    </svg>
-                                </span>
-                            {/if}
-                        </button>
-
-                        <!-- 本文（展開時に表示） -->
-                        {#if isOpen && news.body}
-                            <div
-                                class="px-4 sm:px-2 pb-6 sm:pl-[calc(6rem+2.5rem)]"
-                                in:fade={{ duration: 200 }}
-                                out:fade={{ duration: 150 }}
-                            >
-                                <p
-                                    class="font-serif text-sm text-[#2C2A29]/70 leading-loose tracking-[0.1em] whitespace-pre-wrap border-l-2 border-gold/30 pl-4"
-                                >
-                                    {news.body}
-                                </p>
-                            </div>
-                        {/if}
-                    </div>
+                    <button
+                        type="button"
+                        onclick={() => openNews(news)}
+                        class="w-full text-left group flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-10 py-6 border-b border-main/10 hover:bg-main/[0.03] transition-colors duration-200 px-4 -mx-4 sm:mx-0 sm:px-2"
+                    >
+                        <span class="text-[10px] sm:text-xs font-sans tracking-[0.2em] text-gold/80 w-24 flex-shrink-0">
+                            {formatDate(news.date)}
+                        </span>
+                        <span class="flex-1 text-[#2C2A29] tracking-widest text-sm group-hover:text-[#C5A059] transition-colors duration-200">
+                            {news.title}
+                        </span>
+                        <span class="flex-shrink-0 w-5 h-5 flex items-center justify-center text-gold/50 group-hover:text-gold transition-colors duration-200">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </button>
                 {:else}
                     <div class="py-12 text-center">
                         <p
@@ -432,6 +399,75 @@
         </div>
     </div>
 </section>
+
+<!-- お知らせ モーダル -->
+{#if selectedNews}
+    <!-- 背景オーバーレイ -->
+    <div
+        class="fixed inset-0 z-[200] bg-black/60 backdrop-blur-sm"
+        in:fade={{ duration: 200 }}
+        out:fade={{ duration: 150 }}
+        onclick={closeNews}
+        onkeydown={(e) => e.key === 'Escape' && closeNews()}
+        tabindex="-1"
+        role="button"
+        aria-label="モーダルを閉じる"
+    ></div>
+
+    <!-- モーダル本体 -->
+    <div
+        class="fixed inset-x-4 top-1/2 -translate-y-1/2 z-[201] max-w-lg mx-auto bg-[#FAF8F5] shadow-2xl"
+        in:fade={{ duration: 200 }}
+        out:fade={{ duration: 150 }}
+    >
+        <!-- ヘッダー -->
+        <div class="flex items-start justify-between px-8 pt-8 pb-6 border-b border-main/10">
+            <div class="flex flex-col gap-2 pr-6">
+                <span class="text-[10px] font-sans tracking-[0.3em] text-[#C5A059]">
+                    {formatDate(selectedNews.date)}
+                </span>
+                <h3 class="font-serif text-[#2C2A29] tracking-[0.15em] leading-snug text-base">
+                    {selectedNews.title}
+                </h3>
+            </div>
+            <!-- 閉じるボタン -->
+            <button
+                type="button"
+                onclick={closeNews}
+                class="flex-shrink-0 w-9 h-9 flex items-center justify-center border border-main/20 text-main/50 hover:text-main hover:border-main/50 transition-colors duration-200"
+                aria-label="閉じる"
+            >
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- 本文 -->
+        <div class="px-8 py-6 max-h-[50vh] overflow-y-auto">
+            {#if selectedNews.body}
+                <p class="font-serif text-sm text-[#2C2A29]/75 leading-[2] tracking-[0.12em] whitespace-pre-wrap">
+                    {selectedNews.body}
+                </p>
+            {:else}
+                <p class="font-serif text-sm text-main/40 tracking-widest text-center py-4">
+                    本文はありません。
+                </p>
+            {/if}
+        </div>
+
+        <!-- フッター -->
+        <div class="px-8 pb-8 flex justify-end">
+            <button
+                type="button"
+                onclick={closeNews}
+                class="text-xs font-serif tracking-[0.2em] text-main/50 border border-main/20 px-6 py-3 hover:bg-main hover:text-white transition-colors duration-200"
+            >
+                閉じる
+            </button>
+        </div>
+    </div>
+{/if}
 
 <!-- Today's Special Section -->
 <section class="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-16 md:py-32">
