@@ -282,25 +282,19 @@
                 <!-- Body text column -->
                 <div class="block fade-up delay-200">
                     <p
-                        class="font-serif text-[#2C2A29]/65 text-sm md:text-xs leading-[2.2] md:leading-[2.5] tracking-[0.15em] md:tracking-widest block mb-4 md:mb-0 md:ml-6"
+                        class="font-serif text-[#2C2A29]/65 text-sm md:text-xs leading-[2.0] md:leading-[2.5] tracking-normal md:tracking-widest block mb-4 md:mb-0 md:ml-6 text-center md:text-left"
                     >
-                        当店のお肉はすべて厳選された黒毛和牛を使用し、<br
-                            class="md:hidden"
-                        />鮮度と旨味に徹底的にこだわってご提供しております。
+                        当店のお肉はすべて厳選された黒毛和牛を使用し、鮮度と旨味に徹底的にこだわってご提供しております。
                     </p>
                     <p
-                        class="font-serif text-[#2C2A29]/65 text-sm md:text-xs leading-[2.2] md:leading-[2.5] tracking-[0.15em] md:tracking-widest block mb-4 md:mb-0 md:ml-6"
+                        class="font-serif text-[#2C2A29]/65 text-sm md:text-xs leading-[2.0] md:leading-[2.5] tracking-normal md:tracking-widest block mb-4 md:mb-0 md:ml-6 text-center md:text-left"
                     >
-                        辛いもの好きにはたまらないビビン麵、さっぱりとした韓国冷麺など、<br
-                            class="md:hidden"
-                        />本場の味が楽しめるサイドメニューも豊富にご用意。
+                        辛いもの好きにはたまらないビビン麵、さっぱりとした韓国冷麺など、本場の味が楽しめるサイドメニューも豊富にご用意。
                     </p>
                     <p
-                        class="font-serif text-[#2C2A29]/65 text-sm md:text-xs leading-[2.2] md:leading-[2.5] tracking-[0.15em] md:tracking-widest block md:ml-6"
+                        class="font-serif text-[#2C2A29]/65 text-sm md:text-xs leading-[2.0] md:leading-[2.5] tracking-normal md:tracking-widest block md:ml-6 text-center md:text-left"
                     >
-                        掘りごたつ式の座敷で、ご家族やご友人との特別な時間を<br
-                            class="md:hidden"
-                        />美味しい焼肉とともにお過ごしください。
+                        掘りごたつ式の座敷で、ご家族やご友人との特別な時間を美味しい焼肉とともにお過ごしください。
                     </p>
                 </div>
             </div>
