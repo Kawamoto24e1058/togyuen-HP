@@ -95,83 +95,29 @@
         if (!dateStr) return "";
         return dateStr.replace(/-/g, ".");
     };
+
+    // お知らせアコーディオン
+    /** @type {Set<string>} */
+    let openNewsIds = $state(new Set());
+
+    /** @param {string} id */
+    const toggleNews = (id) => {
+        const next = new Set(openNewsIds);
+        if (next.has(id)) {
+            next.delete(id);
+        } else {
+            next.add(id);
+        }
+        openNewsIds = next;
+    };
 </script>
 
+<!-- Hero Section -->
+<section class="relative">
 
-
-<!-- Hero Section: Split Layout (Left: Text / Right: Slideshow) -->
-<section class="flex flex-col md:flex-row min-h-[70vh] md:min-h-screen">
-    <!-- Left: Text Area -->
-    <div
-        class="w-full md:w-1/2 bg-[#FAF8F5] flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 py-12 md:py-16 relative"
-    >
-        <!-- Thin gold accent line (top) -->
-        <div
-            class="absolute top-8 left-1/2 -translate-x-1/2 w-px h-12 bg-[#C5A059]/50 hidden md:block"
-        ></div>
-
-        <!-- Inner content -->
-        <div class="flex flex-col md:flex-row items-center gap-10 mt-8">
-            <!-- Vertical shop name -->
-            <h1
-                class="text-5xl lg:text-6xl font-serif text-[#2C2A29] tracking-[0.35em] font-medium leading-none"
-                style="writing-mode: vertical-rl;"
-            >
-                桃牛苑
-            </h1>
-
-            <!-- Divider + Catchphrase -->
-            <div
-                class="flex flex-col gap-6 md:pl-10 md:border-l border-[#2C2A29]/15"
-            >
-                <!-- English subtitle -->
-                <span
-                    class="text-[10px] font-sans tracking-[0.4em] text-[#C5A059] uppercase"
-                    >Hormonyakiniku Togyuen</span
-                >
-
-                <p
-                    class="text-base md:text-xl font-serif !text-[#2C2A29] tracking-[0.2em] leading-loose whitespace-pre-wrap"
-                >
-                    {introText}
-                </p>
-
-                <div class="w-10 h-px bg-[#C5A059]/60"></div>
-
-                <!-- Reservation button -->
-                <a
-                    href="tel:0725-53-0083"
-                    class="inline-flex items-center gap-3 border border-[#2C2A29]/30 px-6 py-3 text-xs font-serif text-[#2C2A29] tracking-[0.2em] hover:bg-[#2C2A29] hover:text-[#FAF8F5] transition-colors duration-300 self-start"
-                >
-                    <svg
-                        class="w-3 h-3"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="1.5"
-                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                        />
-                    </svg>
-                    お電話でご予約
-                </a>
-            </div>
-        </div>
-
-        <!-- Thin gold accent line (bottom) -->
-        <div
-            class="absolute bottom-8 left-1/2 -translate-x-1/2 w-px h-12 bg-[#C5A059]/50 hidden md:block"
-        ></div>
-    </div>
-
-    <!-- Right: Image Slideshow -->
-    <div
-        class="w-full md:w-1/2 relative overflow-hidden h-64 md:h-auto min-h-[300px] md:min-h-[500px] flex-grow flex-shrink-0 md:self-stretch"
-        style="-webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%); mask-image: linear-gradient(to bottom, black 80%, transparent 100%);"
-    >
+    <!-- ===================== MOBILE HERO (〜md) ===================== -->
+    <div class="md:hidden relative h-[100svh] min-h-[600px] overflow-hidden">
+        <!-- 背景スライドショー -->
         {#if heroImages.length > 0}
             {#each heroImages as src, index}
                 <img
@@ -184,15 +130,124 @@
         {:else}
             <img
                 src={fallbackHero}
-                alt="Hero Fallback"
+                alt="桃牛苑"
                 class="absolute inset-0 w-full h-full object-cover"
             />
         {/if}
-        <!-- Subtle dark gradient on left edge for depth -->
-        <div
-            class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#FAF8F5]/30 to-transparent pointer-events-none"
-        ></div>
+
+        <!-- グラデーションオーバーレイ -->
+        <div class="absolute inset-0 bg-gradient-to-b from-[#2C2A29]/60 via-[#2C2A29]/20 to-[#2C2A29]/75 pointer-events-none"></div>
+
+        <!-- コンテンツ -->
+        <div class="relative h-full flex flex-col justify-between px-8 pt-12 pb-14">
+            <!-- 上部：店名 + サブタイトル -->
+            <div class="flex flex-col items-center gap-3 mt-4">
+                <span class="text-[9px] font-sans tracking-[0.5em] text-[#C5A059] uppercase">
+                    Hormonyakiniku Togyuen
+                </span>
+                <div class="w-6 h-px bg-[#C5A059]/60"></div>
+            </div>
+
+            <!-- 中央：大きな店名 -->
+            <div class="flex flex-col items-center gap-5">
+                <h1
+                    class="text-[4.5rem] font-serif text-white tracking-[0.3em] font-medium leading-none drop-shadow-lg"
+                >
+                    桃牛苑
+                </h1>
+                <p class="text-sm font-serif text-white/80 tracking-[0.25em] leading-loose text-center whitespace-pre-wrap drop-shadow">
+                    {introText}
+                </p>
+            </div>
+
+            <!-- 下部：CTAボタン -->
+            <div class="flex flex-col items-center gap-4">
+                <div class="w-px h-10 bg-[#C5A059]/50"></div>
+                <a
+                    href="tel:0725-53-0083"
+                    class="w-full max-w-[260px] flex items-center justify-center gap-3 bg-[#C5A059] text-white px-8 py-4 text-sm font-serif tracking-[0.25em] shadow-lg active:opacity-80 transition-opacity"
+                >
+                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    </svg>
+                    お電話でご予約
+                </a>
+                <a
+                    href="/#access"
+                    class="w-full max-w-[260px] flex items-center justify-center gap-3 border border-white/50 text-white px-8 py-4 text-sm font-serif tracking-[0.25em] active:bg-white/10 transition-colors"
+                >
+                    アクセス・営業時間
+                </a>
+            </div>
+        </div>
     </div>
+
+    <!-- ===================== DESKTOP HERO (md〜) ===================== -->
+    <div class="hidden md:flex flex-row min-h-screen">
+        <!-- Left: Text Area -->
+        <div
+            class="w-1/2 bg-[#FAF8F5] flex flex-col justify-center items-center px-12 lg:px-20 py-16 relative"
+        >
+            <div class="absolute top-8 left-1/2 -translate-x-1/2 w-px h-12 bg-[#C5A059]/50"></div>
+
+            <div class="flex flex-row items-center gap-10 mt-8">
+                <h1
+                    class="text-5xl lg:text-6xl font-serif text-[#2C2A29] tracking-[0.35em] font-medium leading-none"
+                    style="writing-mode: vertical-rl;"
+                >
+                    桃牛苑
+                </h1>
+
+                <div class="flex flex-col gap-6 pl-10 border-l border-[#2C2A29]/15">
+                    <span class="text-[10px] font-sans tracking-[0.4em] text-[#C5A059] uppercase"
+                        >Hormonyakiniku Togyuen</span
+                    >
+                    <p class="text-xl font-serif text-[#2C2A29] tracking-[0.2em] leading-loose whitespace-pre-wrap">
+                        {introText}
+                    </p>
+                    <div class="w-10 h-px bg-[#C5A059]/60"></div>
+                    <a
+                        href="tel:0725-53-0083"
+                        class="inline-flex items-center gap-3 border border-[#2C2A29]/30 px-6 py-3 text-xs font-serif text-[#2C2A29] tracking-[0.2em] hover:bg-[#2C2A29] hover:text-[#FAF8F5] transition-colors duration-300 self-start"
+                    >
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                        お電話でご予約
+                    </a>
+                </div>
+            </div>
+
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-px h-12 bg-[#C5A059]/50"></div>
+        </div>
+
+        <!-- Right: Image Slideshow -->
+        <div
+            class="w-1/2 relative overflow-hidden min-h-[500px] self-stretch"
+            style="-webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%); mask-image: linear-gradient(to bottom, black 80%, transparent 100%);"
+        >
+            {#if heroImages.length > 0}
+                {#each heroImages as src, index}
+                    <img
+                        {src}
+                        alt="Hero Slide"
+                        class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
+                        style="opacity: {index === currentIndex ? 1 : 0};"
+                    />
+                {/each}
+            {:else}
+                <img
+                    src={fallbackHero}
+                    alt="Hero Fallback"
+                    class="absolute inset-0 w-full h-full object-cover"
+                />
+            {/if}
+            <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#FAF8F5]/30 to-transparent pointer-events-none"></div>
+        </div>
+    </div>
+
 </section>
 
 <!-- Concept Section -->
@@ -206,7 +261,9 @@
                 class="block mx-auto text-center md:text-left w-full md:w-auto [writing-mode:horizontal-tb] md:[writing-mode:vertical-rl]"
             >
                 <!-- Heading column -->
-                <div class="flex flex-col md:flex-row items-center md:items-start gap-4 mb-8 md:mb-0 md:ml-12 [writing-mode:horizontal-tb] md:[writing-mode:vertical-rl]">
+                <div
+                    class="flex flex-col md:flex-row items-center md:items-start gap-4 mb-8 md:mb-0 md:ml-12 [writing-mode:horizontal-tb] md:[writing-mode:vertical-rl]"
+                >
                     <span
                         class="text-[9px] font-sans tracking-[0.6em] text-[#C5A059] uppercase"
                         >Concept</span
@@ -251,22 +308,11 @@
             class="relative overflow-hidden min-h-[300px] md:min-h-[500px] order-1 md:order-2 fade-up delay-100"
             style="-webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 100%); mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 100%);"
         >
-            {#if assets.length > 0 && assets[0].imageUrl}
-                <img
-                    src={assets[0].imageUrl}
-                    alt="桃牛苑 店内・料理イメージ"
-                    class="w-full h-full min-h-[300px] md:min-h-[500px] object-cover hover:scale-[1.03] transition-transform duration-[2000ms] ease-out"
-                />
-            {:else}
-                <div
-                    class="absolute inset-0 bg-[#2C2A29]/8 flex items-center justify-center"
-                >
-                    <span
-                        class="font-serif text-[#2C2A29]/20 tracking-[0.5em] text-sm"
-                        style="writing-mode: vertical-rl;">桃牛苑</span
-                    >
-                </div>
-            {/if}
+            <img
+                src="/special-set.jpg"
+                alt="平日限定 団体様特別セット 4,980円 | ホルモン焼肉 桃牛苑"
+                class="w-full h-full min-h-[300px] md:min-h-[500px] object-cover hover:scale-[1.03] transition-transform duration-[2000ms] ease-out"
+            />
             <div
                 class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#FCFAF8]/50 to-transparent pointer-events-none md:block hidden"
             ></div>
@@ -304,16 +350,61 @@
                     class="border-t border-main/10 w-full hidden md:block mb-2"
                 ></div>
                 {#each newsItems as news}
-                    <div
-                        class="group flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-10 py-6 border-b border-main/10 hover:bg-main/[0.02] transition-colors duration-300 px-4 -mx-4 sm:mx-0 sm:px-2 cursor-pointer"
-                    >
-                        <span
-                            class="text-[10px] sm:text-xs font-sans tracking-[0.2em] text-gold/80 w-24 flex-shrink-0"
-                            >{formatDate(news.date)}</span
+                    {@const isOpen = openNewsIds.has(news.id)}
+                    <div class="border-b border-main/10">
+                        <!-- タップ可能なヘッダー行 -->
+                        <button
+                            type="button"
+                            onclick={() => toggleNews(news.id)}
+                            class="w-full text-left group flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-10 py-6 hover:bg-main/[0.02] transition-colors duration-300 px-4 -mx-4 sm:mx-0 sm:px-2"
                         >
-                        <p class="text-[#2C2A29] tracking-widest">
-                            {news.title}
-                        </p>
+                            <span
+                                class="text-[10px] sm:text-xs font-sans tracking-[0.2em] text-gold/80 w-24 flex-shrink-0"
+                                >{formatDate(news.date)}</span
+                            >
+                            <span
+                                class="flex-1 text-[#2C2A29] tracking-widest text-sm"
+                            >
+                                {news.title}
+                            </span>
+                            <!-- 開閉インジケーター (本文がある場合のみ表示) -->
+                            {#if news.body}
+                                <span
+                                    class="flex-shrink-0 w-5 h-5 flex items-center justify-center text-gold/60 transition-transform duration-300 {isOpen
+                                        ? 'rotate-180'
+                                        : ''}"
+                                >
+                                    <svg
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        class="w-4 h-4"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="1.5"
+                                            d="M19 9l-7 7-7-7"
+                                        />
+                                    </svg>
+                                </span>
+                            {/if}
+                        </button>
+
+                        <!-- 本文（展開時に表示） -->
+                        {#if isOpen && news.body}
+                            <div
+                                class="px-4 sm:px-2 pb-6 sm:pl-[calc(6rem+2.5rem)]"
+                                in:fade={{ duration: 200 }}
+                                out:fade={{ duration: 150 }}
+                            >
+                                <p
+                                    class="font-serif text-sm text-[#2C2A29]/70 leading-loose tracking-[0.1em] whitespace-pre-wrap border-l-2 border-gold/30 pl-4"
+                                >
+                                    {news.body}
+                                </p>
+                            </div>
+                        {/if}
                     </div>
                 {:else}
                     <div class="py-12 text-center">
@@ -394,12 +485,21 @@
                                 <img
                                     src={item.imageUrl}
                                     alt={item.name}
-                                    class="w-full h-full object-cover filter brightness-90 group-hover:brightness-110 group-hover:scale-105 transition-all duration-700 {item.soldOut ? 'opacity-50' : ''}"
+                                    class="w-full h-full object-cover filter brightness-90 group-hover:brightness-110 group-hover:scale-105 transition-all duration-700 {item.soldOut
+                                        ? 'opacity-50'
+                                        : ''}"
                                 />
                                 {#if item.soldOut}
-                                    <div class="absolute inset-0 flex items-center justify-center z-20">
-                                        <div class="bg-black/40 backdrop-blur-[2px] px-8 py-4 border border-white/20">
-                                            <span class="text-white text-2xl font-serif tracking-[0.3em]">SOLD OUT</span>
+                                    <div
+                                        class="absolute inset-0 flex items-center justify-center z-20"
+                                    >
+                                        <div
+                                            class="bg-black/40 backdrop-blur-[2px] px-8 py-4 border border-white/20"
+                                        >
+                                            <span
+                                                class="text-white text-2xl font-serif tracking-[0.3em]"
+                                                >SOLD OUT</span
+                                            >
                                         </div>
                                     </div>
                                 {/if}
@@ -430,7 +530,10 @@
                         >
                             {item.name}
                             {#if item.soldOut}
-                                <span class="px-3 py-1 text-sm border border-[#8A2A2A] text-[#8A2A2A] font-serif tracking-normal">完売</span>
+                                <span
+                                    class="px-3 py-1 text-sm border border-[#8A2A2A] text-[#8A2A2A] font-serif tracking-normal"
+                                    >完売</span
+                                >
                             {/if}
                         </h3>
 
@@ -535,11 +638,16 @@
                                     class="flex-1 min-w-0 break-words whitespace-normal text-base text-[#2C2A29] leading-snug"
                                 >
                                     <h3
-                                        class="font-serif tracking-[0.15em] mb-1 group-hover/item:translate-x-1 transition-transform duration-500 block {item.soldOut ? '!text-gray-400' : '!text-[#2C2A29]'}"
+                                        class="font-serif tracking-[0.15em] mb-1 group-hover/item:translate-x-1 transition-transform duration-500 block {item.soldOut
+                                            ? '!text-gray-400'
+                                            : '!text-[#2C2A29]'}"
                                     >
                                         {item.name}
                                         {#if item.soldOut}
-                                            <span class="ml-3 px-2 py-0.5 text-[10px] border border-[#8A2A2A] text-[#8A2A2A] font-serif tracking-normal vertical-middle">完売</span>
+                                            <span
+                                                class="ml-3 px-2 py-0.5 text-[10px] border border-[#8A2A2A] text-[#8A2A2A] font-serif tracking-normal vertical-middle"
+                                                >完売</span
+                                            >
                                         {/if}
                                     </h3>
                                     {#if item.description}
@@ -551,7 +659,9 @@
                                     {/if}
                                 </div>
                                 <p
-                                    class="flex-shrink-0 whitespace-nowrap text-sm {item.soldOut ? 'text-gray-400' : 'text-[#2C2A29]'} pt-1 tracking-widest font-serif"
+                                    class="flex-shrink-0 whitespace-nowrap text-sm {item.soldOut
+                                        ? 'text-gray-400'
+                                        : 'text-[#2C2A29]'} pt-1 tracking-widest font-serif"
                                 >
                                     ¥{item.price !== null
                                         ? item.price.toLocaleString()
@@ -638,7 +748,7 @@
                             class="font-serif leading-loose tracking-[0.1em] text-sm text-main/80"
                         >
                             平日 17:00～22:30<br />
-                            土日祝 15:00～22:30<br />
+                            土日 15:00～22:30<br />
                             定休日：水曜日
                         </p>
                     </div>

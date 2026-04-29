@@ -17,6 +17,11 @@
 	};
 
 	onMount(() => {
+		// Service Worker 登録 (PWA)
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('/sw.js').catch(() => {});
+		}
+
 		// Splash screen: show once per session
 		const hasVisited = sessionStorage.getItem("visited_togyuen");
 		if (hasVisited) {
@@ -72,19 +77,69 @@
 </script>
 
 <svelte:head>
-	<title>ホルモン焼肉 桃牛苑 | 和泉中央の厳選黒毛和牛</title>
-	<meta name="description" content="大阪府和泉市（和泉中央）の老舗焼肉店「桃牛苑」。厳選された黒毛和牛と本場韓国の味を、落ち着いた和モダンの空間でご堪能ください。">
+	<title>ホルモン焼肉 桃牛苑 | 和泉市（和泉中央）の黒毛和牛・ホルモン焼肉</title>
+	<meta name="description" content="大阪府和泉市（和泉中央）のホルモン焼肉「桃牛苑」。厳選された黒毛和牛・新鮮ホルモンを堀りごたつ個室でご堪能。平日限定 団体様特別セット4,980円〜。ご予約はお電話0725-53-0083まで。">
+	<meta name="keywords" content="桃牛苑,ホルモン焼肉,和泉市,和泉中央,黒毛和牛,焼肉,ホルモン,大阪,唐国町,団体,宴会,個室,堀りごたつ">
 
 	<!-- OGP -->
-	<meta property="og:title" content="ホルモン焼肉 桃牛苑 | 和泉中央の厳選黒毛和牛">
-	<meta property="og:description" content="厳選された黒毛和牛と本場韓国の味を、和泉中央で。ご家族やご友人との特別な時間を美味しい焼肉とともにお過ごしください。">
-	<meta property="og:type" content="website">
+	<meta property="og:title" content="ホルモン焼肉 桃牛苑 | 和泉市（和泉中央）の黒毛和牛・ホルモン焼肉">
+	<meta property="og:description" content="厳選された黒毛和牛と新鮮ホルモンを、堀りごたつの個室でご堪能。平日限定 団体様特別セット4,980円〜。大阪府和泉市（和泉中央）。ご予約 0725-53-0083。">
+	<meta property="og:type" content="restaurant">
 	<meta property="og:url" content="https://togyuen-hp.vercel.app/">
-	<meta property="og:image" content="https://prod-files-secure.s3.us-west-2.amazonaws.com/c41f5244-e739-81f9-b55c-0003490499e3/bc3c864f-67b8-4780-bd11-12c7713dd89f/niku.webp">
+	<meta property="og:image" content="https://togyuen-hp.vercel.app/special-set.jpg">
 	<meta property="og:site_name" content="ホルモン焼肉 桃牛苑">
+	<meta property="og:locale" content="ja_JP">
 
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="ホルモン焼肉 桃牛苑 | 和泉市（和泉中央）">
+	<meta name="twitter:description" content="厳選された黒毛和牛と新鮮ホルモン。平日限定 団体様特別セット4,980円〜。大阪府和泉市。">
+	<meta name="twitter:image" content="https://togyuen-hp.vercel.app/special-set.jpg">
 
-
+	<!-- 構造化データ (JSON-LD) -->
+	{@html `<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Restaurant",
+		"name": "ホルモン焼肉 桃牛苑",
+		"alternateName": "桃牛苑",
+		"description": "厳選された黒毛和牛と新鮮ホルモンを堀りごたつの個室でご堪能いただける、大阪府和泉市のホルモン焼肉店。",
+		"url": "https://togyuen-hp.vercel.app/",
+		"image": "https://togyuen-hp.vercel.app/special-set.jpg",
+		"telephone": "0725-53-0083",
+		"servesCuisine": ["焼肉", "ホルモン", "黒毛和牛"],
+		"priceRange": "¥¥",
+		"address": {
+			"@type": "PostalAddress",
+			"streetAddress": "唐国町2丁目5-11",
+			"addressLocality": "和泉市",
+			"addressRegion": "大阪府",
+			"postalCode": "594-1151",
+			"addressCountry": "JP"
+		},
+		"geo": {
+			"@type": "GeoCoordinates",
+			"latitude": 34.4869,
+			"longitude": 135.4169
+		},
+		"openingHoursSpecification": [
+			{
+				"@type": "OpeningHoursSpecification",
+				"dayOfWeek": ["Monday", "Tuesday", "Thursday", "Friday"],
+				"opens": "17:00",
+				"closes": "22:30"
+			},
+			{
+				"@type": "OpeningHoursSpecification",
+				"dayOfWeek": ["Saturday", "Sunday"],
+				"opens": "15:00",
+				"closes": "22:30"
+			}
+		],
+		"hasMap": "https://maps.google.co.jp/maps?q=ホルモン焼肉桃牛苑+和泉市唐国町2丁目5-11",
+		"sameAs": ["https://www.instagram.com/togyuengram/"]
+	}
+	<\/script>`}
 </svelte:head>
 
 {#if showSplash}

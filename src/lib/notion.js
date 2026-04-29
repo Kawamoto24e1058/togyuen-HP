@@ -131,7 +131,14 @@ export async function getNewsItems() {
         return response.results.map(page => ({
             id: page.id,
             title: page.properties['名前']?.title?.[0]?.plain_text || 'タイトルなし',
-            date: page.properties['掲載開始']?.date?.start || '日付なし'
+            date: page.properties['掲載開始']?.date?.start || '日付なし',
+            body: (
+                page.properties['本文']?.rich_text?.map((/** @type {any} */ t) => t.plain_text).join('') ||
+                page.properties['内容']?.rich_text?.map((/** @type {any} */ t) => t.plain_text).join('') ||
+                page.properties['Body']?.rich_text?.map((/** @type {any} */ t) => t.plain_text).join('') ||
+                page.properties['Content']?.rich_text?.map((/** @type {any} */ t) => t.plain_text).join('') ||
+                ''
+            )
         }));
     } catch (error) {
         console.error('Error fetching news from Notion (getNewsItems):', error);
