@@ -355,10 +355,17 @@
                         <span class="text-[10px] sm:text-xs font-sans tracking-[0.2em] text-gold/80 w-24 flex-shrink-0">
                             {formatDate(news.date)}
                         </span>
-                        <span class="flex-1 text-[#2C2A29] tracking-widest text-sm group-hover:text-[#C5A059] transition-colors duration-200">
-                            {news.title}
-                        </span>
-                        <span class="flex-shrink-0 w-5 h-5 flex items-center justify-center text-gold/50 group-hover:text-gold transition-colors duration-200">
+                        <div class="flex-1 flex flex-col gap-1.5 min-w-0">
+                            <span class="text-[#2C2A29] tracking-widest text-sm group-hover:text-[#C5A059] transition-colors duration-200">
+                                {news.title}
+                            </span>
+                            {#if news.body}
+                                <span class="text-[11px] font-serif text-main/45 tracking-[0.08em] leading-relaxed line-clamp-2">
+                                    {news.body}
+                                </span>
+                            {/if}
+                        </div>
+                        <span class="flex-shrink-0 w-5 h-5 flex items-center justify-center text-gold/50 group-hover:text-gold transition-colors duration-200 self-start mt-0.5">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-4 h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
                             </svg>
