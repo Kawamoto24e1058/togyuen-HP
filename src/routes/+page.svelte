@@ -134,8 +134,8 @@
         {/if}
 
         <!-- オーバーレイ -->
-        <div class="absolute inset-0 bg-black/42 pointer-events-none"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/55 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-black/65 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50 pointer-events-none"></div>
 
         <!-- コンテンツ -->
         <div class="relative h-full flex flex-col justify-between items-center px-8 pt-8 pb-14 text-center">
