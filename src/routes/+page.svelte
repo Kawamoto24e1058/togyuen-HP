@@ -153,7 +153,7 @@
             <div class="flex flex-col items-center gap-5">
                 <h1
                     class="font-serif text-white font-medium whitespace-nowrap"
-                    style="font-size: clamp(2rem, 13vw, 3rem); letter-spacing: 0.35em; text-shadow: 0 2px 20px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,0.8);"
+                    style="font-size: clamp(3rem, 18vw, 4.5rem); letter-spacing: 0.35em; text-shadow: 0 2px 20px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,0.8);"
                 >
                     桃牛苑
                 </h1>
