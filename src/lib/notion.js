@@ -18,8 +18,7 @@ export async function getMenuItems() {
             path: `databases/${dbId}/query`,
             method: 'post',
             body: {
-                page_size: 100,
-                sorts: [{ property: 'カテゴリ', direction: 'ascending' }]
+                page_size: 100
             }
         });
 
