@@ -19,7 +19,7 @@ export async function getMenuItems() {
             method: 'post',
             body: {
                 page_size: 100,
-                sorts: [{ property: '順番', direction: 'ascending' }]
+                sorts: [{ property: '並び順', direction: 'ascending' }]
             }
         });
 
