@@ -17,7 +17,10 @@ export async function getMenuItems() {
         const response = await notion.request({
             path: `databases/${dbId}/query`,
             method: 'post',
-            body: {}
+            body: {
+                page_size: 100,
+                sorts: [{ property: 'カテゴリ', direction: 'ascending' }]
+            }
         });
 
         // @ts-ignore
@@ -117,29 +120,41 @@ export async function getNewsItems() {
         const response = await notion.request({
             path: `databases/${dbId}/query`,
             method: 'post',
-            body: {
-                sorts: [
-                    {
-                        property: '掲載開始',
-                        direction: 'descending'
-                    }
-                ]
-            }
+            body: { page_size: 100 }
         });
 
         // @ts-ignore
-        return response.results.map(page => ({
-            id: page.id,
-            title: page.properties['名前']?.title?.[0]?.plain_text || 'タイトルなし',
-            date: page.properties['掲載開始']?.date?.start || '日付なし',
-            body: (
-                page.properties['本文']?.rich_text?.map((/** @type {any} */ t) => t.plain_text).join('') ||
-                page.properties['内容']?.rich_text?.map((/** @type {any} */ t) => t.plain_text).join('') ||
-                page.properties['Body']?.rich_text?.map((/** @type {any} */ t) => t.plain_text).join('') ||
-                page.properties['Content']?.rich_text?.map((/** @type {any} */ t) => t.plain_text).join('') ||
-                ''
-            )
-        }));
+        const items = response.results.map(page => {
+            // 掲載開始プロパティがあればそれを、なければページの作成日を使う
+            const propertyDate = page.properties['掲載開始']?.date?.start || null;
+            const fallbackDate = page.created_time
+                ? page.created_time.split('T')[0]
+                : null;
+            const date = propertyDate || fallbackDate;
+
+            return {
+                id: page.id,
+                title: page.properties['名前']?.title?.[0]?.plain_text || 'タイトルなし',
+                date,
+                body: (
+                    page.properties['本文']?.rich_text?.map((/** @type {any} */ t) => t.plain_text).join('') ||
+                    page.properties['内容']?.rich_text?.map((/** @type {any} */ t) => t.plain_text).join('') ||
+                    page.properties['Body']?.rich_text?.map((/** @type {any} */ t) => t.plain_text).join('') ||
+                    page.properties['Content']?.rich_text?.map((/** @type {any} */ t) => t.plain_text).join('') ||
+                    ''
+                )
+            };
+        });
+
+        // 日付の新しい順にソート
+        items.sort((/** @type {{date: string|null}} */ a, /** @type {{date: string|null}} */ b) => {
+            if (!a.date && !b.date) return 0;
+            if (!a.date) return 1;
+            if (!b.date) return -1;
+            return b.date.localeCompare(a.date);
+        });
+
+        return items;
     } catch (error) {
         console.error('Error fetching news from Notion (getNewsItems):', error);
         return [];

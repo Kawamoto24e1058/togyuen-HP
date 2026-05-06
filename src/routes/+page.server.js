@@ -18,7 +18,7 @@ export async function load() {
 
     return {
         menuItems,
-        newsItems,
+        newsItems: newsItems.slice(0, 3),
         siteAssets,
         recommendedItems,
         isError: !!isError

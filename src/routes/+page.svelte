@@ -48,8 +48,11 @@
     // Tab selection state
     let selectedCategory = $state("");
     $effect(() => {
-        if (sortedCategories.length > 0 && !selectedCategory) {
-            selectedCategory = sortedCategories[0];
+        if (sortedCategories.length > 0) {
+            // 未選択 or 選択中のカテゴリが存在しなくなった場合は先頭にリセット
+            if (!selectedCategory || !sortedCategories.includes(selectedCategory)) {
+                selectedCategory = sortedCategories[0];
+            }
         }
     });
 
