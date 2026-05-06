@@ -18,7 +18,8 @@ export async function getMenuItems() {
             path: `databases/${dbId}/query`,
             method: 'post',
             body: {
-                page_size: 100
+                page_size: 100,
+                sorts: [{ property: '順番', direction: 'ascending' }]
             }
         });
 
@@ -46,6 +47,7 @@ export async function getMenuItems() {
                 soldOut: page.properties['売り切れ']?.checkbox || false,
                 description: page.properties['説明']?.rich_text?.[0]?.plain_text || '',
                 imageUrl: imageUrl,
+                order: page.properties['順番']?.number ?? null,
             };
         });
     } catch (error) {
